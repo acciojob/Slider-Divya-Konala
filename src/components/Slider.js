@@ -60,7 +60,7 @@ const Slider=()=>{
         <div id='review-container'>
                 {
                     (person!==undefined)
-                    ?<section>
+                    ?<section id={person.id-1}>
                         <p>ID: {person.id}</p>
                         <img width={"200px"} src={person.image}/>
                         <p>Name: {person.name}</p>
