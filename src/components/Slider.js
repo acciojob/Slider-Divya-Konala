@@ -41,6 +41,7 @@ const data=[
 const Slider=()=>{
   const [person,setPerson]=useState(data[0]);
   
+  const generateId=()=>'person-'+(person.id-1);
   function handleNext(){
     setPerson((prevPerson)=>(prevPerson.id==data.length)?data[0]:data[prevPerson.id]) 
   }
@@ -58,9 +59,7 @@ const Slider=()=>{
     return <div className='Slider'>
         <h1 id='review-heading'>Reviews</h1>
         <div id='review-container'>
-                {
-                    (person!==undefined)
-                    ?<section id={person.id-1}>
+                <section id={generateId()}>
                         <p>ID: {person.id}</p>
                         <img width={"200px"} src={person.image}/>
                         <p>Name: {person.name}</p>
@@ -71,8 +70,6 @@ const Slider=()=>{
                           <button className="next" onClick={handleNext}>Next</button>
                         </div>
                     </section>
-                    :""
-                }
         </div>
     </div>
 }
