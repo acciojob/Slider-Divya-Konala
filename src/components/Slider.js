@@ -40,36 +40,38 @@ const data=[
 
 const Slider=()=>{
   const [person,setPerson]=useState(data[0]);
-  
-  const generateId=()=>'person-'+(person.id-1);
-  function handleNext(){
-    setPerson((prevPerson)=>(prevPerson.id==data.length)?data[0]:data[prevPerson.id]) 
-  }
+    
+    const handlePrev=()=>{
+        setPerson((prev)=>(prev.id==1)?data[data.length-1]:data[prev.id-2])
+    }
 
-  function handlePrev(){
-    setPerson((prevPerson)=>(prevPerson.id==1)?data[data.length-1]:data[prevPerson.id-2]) 
-  }
-  
-  useEffect(()=>{
-    setInterval(() => {
-      handleNext();
-      },3000);
-  },[]);
+    const handleNext=()=>{
+        setPerson((prev)=>(prev.id==data.length)?data[0]:data[prev.id])
+    }
 
-    return <div className='Slider'>
-        <h1 id='review-heading'>Reviews</h1>
-        <div id='review-container'>
-                <section id={generateId()}>
-                        <p>ID: {person.id}</p>
-                        <img width={"200px"} src={person.image}/>
-                        <p>Name: {person.name}</p>
-                        <p>Title: {person.title}</p>
-                        <p>Quote: {person.quote}</p>
-                        <div className='navigationBtns'>
-                          <button className="prev" onClick={handlePrev}>Prev</button>
-                          <button className="next" onClick={handleNext}>Next</button>
-                        </div>
-                    </section>
+    const generateId=()=>{
+        return "person-"+(person.id-1);
+    }
+
+    const generateImgId=()=>{
+      return "person-"+(person.id-1)+"-image";
+    }
+
+    useEffect(()=>{
+      setInterval(()=>{
+        handleNext();
+      },3000)
+    },[])
+
+    return <div className='review'>
+        <h1 id="review-heading">Reviews</h1>
+        <div id="review-container">
+            <img id={generateImgId()} src={person.image} width="200px"/>
+            <p id={generateId()}>Name: {person.name}</p>
+            <p id='title'>Title: {person.title}</p>
+            <p id='quote'>Info: {person.quote}</p>
+            <button className='prev' onClick={handlePrev}>Prev</button>
+        <button className='next' onClick={handleNext}>Next</button>
         </div>
     </div>
 }
